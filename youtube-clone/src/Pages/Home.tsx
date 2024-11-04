@@ -51,13 +51,13 @@ function Home() {
     }, [])
 
     useEffect(() => {
-        console.log(homeVideos)
+        //console.log(homeVideos)
     }, [homeVideos])
 
     return (
         <div className='row row-cols-3 w-[95%] mx-auto mt-6 '>
             {homeVideos?.map((item) =>
-                <Card data={item} />
+                <Card key={item.videoId} data={item} />
             )}
         </div>
     )

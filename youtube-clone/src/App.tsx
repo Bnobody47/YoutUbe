@@ -5,11 +5,15 @@ import Home from "./Pages/Home"
 
 function App() {
   const [filter,setFilter] = useState("home")
+  const [categoryId,setCategoryId] = useState<string | null>(null)
 
   return (
     <div className="">
+      {
+        categoryId
+      }
       <div className="offcanvas offcanvas-start" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <Sidebar filter={filter} setFilter={setFilter}/>
+        <Sidebar filter={filter} setFilter={setFilter} setCategoryId={setCategoryId}/>
       </div>
       <Navbar />
       <Home />
