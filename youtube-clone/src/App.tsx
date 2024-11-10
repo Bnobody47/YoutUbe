@@ -9,14 +9,11 @@ function App() {
 
   return (
     <div className="">
-      {
-        categoryId
-      }
       <div className="offcanvas offcanvas-start" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <Sidebar filter={filter} setFilter={setFilter} setCategoryId={setCategoryId}/>
       </div>
       <Navbar />
-      <Home />
+      <Home filter={filter} categoryId={categoryId}/>
     </div>
   )
 }
