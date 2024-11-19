@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaYoutube } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
@@ -5,6 +6,7 @@ import { AiOutlineClose } from "react-icons/ai";
 
 
 function Navbar() {
+  const navigate = useNavigate()
   return (
     <div className='w-full bg-[#0c0c0c]'>
       <div className="flex justify-between h-14 w-[95%] mx-auto">
@@ -12,7 +14,9 @@ function Navbar() {
           <a className="" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
             <RxHamburgerMenu className="text-xl"/>
           </a>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1"
+            onClick={()=> navigate(`/`)}
+          >
             <FaYoutube className="text-3xl text-red-600"/>
             <span className="text-xl">Youtube</span>
           </div>

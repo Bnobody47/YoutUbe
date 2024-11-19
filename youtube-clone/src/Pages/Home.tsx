@@ -4,6 +4,7 @@ import axios from 'axios'
 import { HomeVideoCardType } from '../utils/Types'
 import { useHome } from '../Hooks/useHome'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import Loading from '../Components/Loading'
 
 
 function Home({filter, categoryId}:{filter: string, categoryId: string | null}) {
@@ -28,7 +29,7 @@ function Home({filter, categoryId}:{filter: string, categoryId: string | null}) 
                     next={ ()=> fetchHomeVideos(filter,categoryId, homeVideos[filter].nextPageToken)}
                     hasMore={true}
                     dataLength={homeVideos[filter].videos.length }
-                    loader={<h4>Loading...</h4> }
+                    loader={<Loading /> }
                 >
                 <div className='row row-cols-3 w-[95%] mx-auto mt-6 '>
                         {homeVideos[filter].videos?.map(item =>

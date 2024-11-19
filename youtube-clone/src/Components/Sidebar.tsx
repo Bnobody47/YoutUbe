@@ -1,5 +1,6 @@
 import {useState} from "react"
 import axios from "axios";
+import { useNavigate } from 'react-router-dom'
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaYoutube } from "react-icons/fa";
 import { MdHomeFilled } from "react-icons/md";
@@ -19,6 +20,8 @@ function Sidebar({filter, setFilter , setCategoryId}: {
   setFilter: (filter: string) => void
   setCategoryId:(categoryId: string|null) => void
 }) {
+  const navigate = useNavigate()
+
   const [categoriesData,setCategoriesData]= useState<any[]>([])
 
   const fetchAndsetCategories = async () =>{
@@ -95,7 +98,9 @@ function Sidebar({filter, setFilter , setCategoryId}: {
             <a className="" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
               <RxHamburgerMenu className="text-xl"/>
             </a>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1"
+              onClick={()=> navigate(`/`)}
+            >
               <FaYoutube className="text-3xl text-red-600"/>
               <span className="text-xl">Youtube</span>
             </div>
@@ -106,7 +111,7 @@ function Sidebar({filter, setFilter , setCategoryId}: {
                   <li
                   key={name}
                   className={`pl-6 py-3 hover:bg-neutral-800 ${filter == filterTag ? "bg-neutral-800" : ""}`}
-                  onClick={() => toggleFilter(filterTag , categoryId)}
+                  onClick={() => {toggleFilter(filterTag , categoryId); navigate(`/`)}}
                   >
 
                     <h1 className="flex items-center gap-5">
