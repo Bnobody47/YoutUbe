@@ -1,4 +1,5 @@
 import React from 'react'
+import VideoDetails from '../Components/VideoDetails'
 
 function Watch() {
   return (
@@ -6,7 +7,7 @@ function Watch() {
         <div className="row">
             <div className="col-8 ">
                 <div className="w-full aspect-[16/9] bg-red-400"></div>
-                {/* VideoDetails */}
+                <VideoDetails />
                 <div className=""></div>
             </div>
             <div className="col-4 ">2</div>
