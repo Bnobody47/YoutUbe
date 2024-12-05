@@ -9,15 +9,16 @@ import { fetchVideosWithChannels } from '../utils/VideoDetailsHelper'
 const API_KEY =import.meta.env.VITE_API_KEY
 
 function Watch() {
-  const{videoId} = useParams()
-  console.log(`Video ID`, videoId)
+  const{videoId, channelId} = useParams()
+  const [activities, setActivities] = useState<HomeVideoCardType[]>()
 
+  
   const [details,setDetails]= useState<HomeVideoCardType>()
 
   const fetchDetails= async()=> {
     try {
       const response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&part=snippet,contentDetails,statistics&id=${videoId}`)
-      console.log(`res`, response.data.items)
+      // console.log(`res`, response.data.items)
       const items = response.data.items
 
       const VideoDetails = await fetchVideosWithChannels(items)
@@ -27,12 +28,49 @@ function Watch() {
     }
   }
 
-  useEffect(()=>{
-    console.log(`details`, details)
-  }, [details])
+  const fetchActivities= async()=>{
+    try{
+      const response = await axios.get(`https://www.googleapis.com/youtube/v3/activities?key=${API_KEY}&part=snippet,contentDetails&channelId=${channelId}&maxResults=20`)
+      // console.log("activities", response)
+      const items = response.data.items
 
+      const videoIds: string[] = []
+
+      items.forEach(
+        (item:{
+          contentDetails:{
+            upload?:{ videoId:string },
+            playlistItem?:{ resourceId: {videoId: string}}
+          }
+        }) => {
+          if(item.contentDetails.upload){
+            videoIds.push(item.contentDetails.upload.videoId)
+          }else if(item.contentDetails.playlistItem){
+            videoIds.push(item.contentDetails.playlistItem.resourceId.videoId)
+          }
+        }
+      )
+
+      const vidResponse = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&part=snippet,contentDetails,statistics&id=${videoIds}`)
+      // console.log("vidResponse", vidResponse)
+
+      const videosArray = await fetchVideosWithChannels(vidResponse.data.items)
+      console.log("videosArray", videosArray)
+      setActivities(videosArray)
+
+    } catch(error){
+
+    }
+
+  }
+
+  useEffect(()=>{
+    // console.log(`details`, details)
+  }, [details])
+  
   useEffect(() => {
     fetchDetails()
+    fetchActivities()
   }, [])
 
   return (
@@ -52,8 +90,8 @@ function Watch() {
                 <div className=""></div>
             </div>
             <div className="col-4 flex flex-col gap-3">{
-              [...Array(12)].map((item, ind) =>
-                  <MiniCard />
+              activities?.map((item, ind) =>
+                  <MiniCard item={item}/>
                 )
             }</div>
         </div>
