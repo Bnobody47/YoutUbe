@@ -5,6 +5,7 @@ import VideoDetails from '../Components/VideoDetails'
 import MiniCard from '../Components/MiniCard'
 import { HomeVideoCardType } from '../utils/Types'
 import { fetchVideosWithChannels } from '../utils/VideoDetailsHelper'
+import Comments from '../Components/Comments'
 
 const API_KEY =import.meta.env.VITE_API_KEY
 
@@ -87,7 +88,7 @@ function Watch() {
                   >
                 </iframe>
                 <VideoDetails details={details} />
-                <div className=""></div>
+                <Comments />
             </div>
             <div className="col-4 flex flex-col gap-3">{
               activities?.map((item, ind) =>
