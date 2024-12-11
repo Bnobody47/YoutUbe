@@ -88,7 +88,7 @@ function Watch() {
                   >
                 </iframe>
                 <VideoDetails details={details} />
-                <Comments />
+                <Comments videoId={details?.videoId}/>
             </div>
             <div className="col-4 flex flex-col gap-3">{
               activities?.map((item, ind) =>
