@@ -5,7 +5,6 @@ import {CommentBodyType } from '../utils/Types'
 function CommentBody({item}:{item: CommentBodyType}) {
   return (
     <div className="flex gap-3">
-        
         <img src={item.authorProfile} className="bg-red-300 w-10 h-fit aspect-[1/1] rounded-full" alt="" />
             <div className="">
                 <h1 className='text-md'>{item.authorName}</h1>

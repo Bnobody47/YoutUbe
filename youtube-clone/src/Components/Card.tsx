@@ -14,7 +14,9 @@ function Card({ data }: {data: HomeVideoCardType}) {
       </div>
       {/*details*/}
       <div className="flex gap-2">
-        <img src={data.channelInfo.image} className="bg-red-300 aspect-[1/1] rounded-full h-12" alt="" />
+        <Link to={`/channel/${data.channelInfo.id}`}>
+          <img src={data.channelInfo.image} className="bg-red-300 aspect-[1/1] rounded-full h-12" alt="" />
+        </Link>
         <div className='flex flex-col'>
           <h3 className='text-lg line-clamp-2'>{data.videoTitle}</h3>
           <div className="text-md">
