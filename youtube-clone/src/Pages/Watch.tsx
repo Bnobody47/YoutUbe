@@ -92,7 +92,7 @@ function Watch() {
             </div>
             <div className="col-4 flex flex-col gap-3">{
               activities?.map((item, ind) =>
-                  <MiniCard item={item}/>
+                  <MiniCard key={ind} item={item}/>
                 )
             }</div>
         </div>
