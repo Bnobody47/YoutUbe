@@ -6,6 +6,7 @@ import MiniCard from '../Components/MiniCard'
 import { HomeVideoCardType } from '../utils/Types'
 import { fetchVideosWithChannels } from '../utils/VideoDetailsHelper'
 import Comments from '../Components/Comments'
+import { getActivities, getActivitiesVideos, getVideoDetails } from '../utils/api'
 
 const API_KEY =import.meta.env.VITE_API_KEY
 
@@ -18,11 +19,10 @@ function Watch() {
 
   const fetchDetails= async()=> {
     try {
-      const response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&part=snippet,contentDetails,statistics&id=${videoId}`)
+      const res = await getVideoDetails(videoId!)
       // console.log(`res`, response.data.items)
-      const items = response.data.items
 
-      const VideoDetails = await fetchVideosWithChannels(items)
+      const VideoDetails = await fetchVideosWithChannels(res)
       setDetails(VideoDetails[0])
     } catch (error) {
 
@@ -31,13 +31,12 @@ function Watch() {
 
   const fetchActivities= async()=>{
     try{
-      const response = await axios.get(`https://www.googleapis.com/youtube/v3/activities?key=${API_KEY}&part=snippet,contentDetails&channelId=${channelId}&maxResults=20`)
+      const response = await getActivities(channelId!)
       // console.log("activities", response)
-      const items = response.data.items
-
+      
       const videoIds: string[] = []
 
-      items.forEach(
+      response.forEach(
         (item:{
           contentDetails:{
             upload?:{ videoId:string },
@@ -52,10 +51,10 @@ function Watch() {
         }
       )
 
-      const vidResponse = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&part=snippet,contentDetails,statistics&id=${videoIds}`)
+      const vidResponse = await getActivitiesVideos(videoIds!)
       // console.log("vidResponse", vidResponse)
 
-      const videosArray = await fetchVideosWithChannels(vidResponse.data.items)
+      const videosArray = await fetchVideosWithChannels(vidResponse.items)
       console.log("videosArray", videosArray)
       setActivities(videosArray)
 

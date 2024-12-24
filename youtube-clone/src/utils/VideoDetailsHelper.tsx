@@ -1,5 +1,6 @@
 import { HomeVideoCardType } from "./Types"
 import axios from "axios"
+import { getChannelInfo } from "./api"
 
 const API_KEY = import.meta.env.VITE_API_KEY
 
@@ -23,10 +24,11 @@ export const fetchVideosWithChannels = async (items: any[]) => {
         
         const channelIds = videoData.map((video: HomeVideoCardType) => video.channelInfo.id).join(',')
         
-        const channelResponse = await axios.get(`https://www.googleapis.com/youtube/v3/channels?key=${API_KEY}&part=snippet&id=${channelIds}`)
+        const channelResponse = await getChannelInfo(channelIds)
         
         const channelData: { [key: string]: {image: string, subCount:string} } = {}
-        channelResponse.data.items.forEach((channel: any) => {
+
+        channelResponse.forEach((channel: any) => {
             channelData[channel.id] = {
                 image: channel.snippet.thumbnails.default.url || channel.snippet.thumbnails.medium.url || channel,
                 subCount: channel.statistics?.subscriberCount || null

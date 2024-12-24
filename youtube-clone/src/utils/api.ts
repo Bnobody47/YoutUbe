@@ -10,6 +10,24 @@ export const getHomeVideos = async (categoryId: string, pageToken?: string) => {
     return response.data
 }
 
+export const getActivitiesVideos = async (videoIds: string[]) => {
+    const url = `${BASE_URL}/v3/videos?key=${API_KEY}&part=snippet,contentDetails,statistics&id=${videoIds}`;
+    const response = await axios.get(url)
+    return response.data
+}
+
+export const getVideoDetails=async (videoId: string) => {
+    const url = `${BASE_URL}/v3/videos?key=${API_KEY}&part=snippet,contentDetails,statistics&id=${videoId}`
+    const response = await axios.get(url)
+    return response.data.items
+}
+
+export const getActivities =async (channelId: string) => {
+    const url = `${BASE_URL}/v3/activities?key=${API_KEY}&part=snippet,contentDetails&channelId=${channelId}&maxResults=20`
+    const response = await axios.get(url)
+    return response.data.items
+}
+
 export const getVideoComments =async (videoId: string, pageToken?: string) => {
     const url = `${BASE_URL}/v3/commentThreads?key=${API_KEY}&part=snippet,replies&videoId=${videoId}&${pageToken ?`&pageToken=${pageToken}`:``}`
     const response = await axios.get(url)
@@ -22,8 +40,8 @@ export const getCommentReplies =async (commentId: string) => {
     return response.data.items
 }
 
-export const getChannelInfo =async (channelId: string) => {
-    const url = `${BASE_URL}/v3/channels?key=${API_KEY}&part=snippet,contentDetails,statistics&id=${channelId}`
+export const getChannelInfo =async (channelId?: string, channelIds?: string[]) => {
+    const url = `${BASE_URL}/v3/channels?key=${API_KEY}&part=snippet,contentDetails,statistics&id=${channelId ? channelId : channelIds}`
     const response = await axios.get(url)
-    return response.data.items[0]
+    return response.data.items
 }

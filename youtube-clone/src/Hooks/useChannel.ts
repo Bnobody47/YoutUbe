@@ -12,18 +12,18 @@ export const usechannel= () => {
         const channelInfoResponse = await getChannelInfo(channelId)
 
         const channelInfoData = {
-            id: channelInfoResponse.id,
+            id: channelInfoResponse[0].id,
             thumbnails:
-                channelInfoResponse.snippet.thumbnails?.high?.url ||
-                channelInfoResponse.snippet.thumbnails?.medium?.url ||
-                channelInfoResponse.snippet.thumbnails?.default?.url ||
+                channelInfoResponse[0].snippet.thumbnails?.high?.url ||
+                channelInfoResponse[0].snippet.thumbnails?.medium?.url ||
+                channelInfoResponse[0].snippet.thumbnails?.default?.url ||
                 '',
-            title: channelInfoResponse.snippet.title,
-            customUrl:channelInfoResponse.snippet.customUrl,
-            description: channelInfoResponse.snippet.description,
-            viewCount: channelInfoResponse.statistics.viewCount,
-            subCount: channelInfoResponse.statistics.subscriberCount,
-            videoCount: channelInfoResponse.statistics.videoCount
+            title: channelInfoResponse[0].snippet.title,
+            customUrl:channelInfoResponse[0].snippet.customUrl,
+            description: channelInfoResponse[0].snippet.description,
+            viewCount: channelInfoResponse[0].statistics.viewCount,
+            subCount: channelInfoResponse[0].statistics.subscriberCount,
+            videoCount: channelInfoResponse[0].statistics.videoCount
 
         }
 
