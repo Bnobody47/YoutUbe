@@ -16,7 +16,7 @@ export interface HomeVideoCardType {
 }
 
 export interface CommentBodyType {
-    conmmentId: string,
+    commentId: string,
     authorChannelId: string,
     authorProfile: string,
     authorName: string,

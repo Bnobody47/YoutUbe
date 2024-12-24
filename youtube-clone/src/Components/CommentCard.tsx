@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import { CommentBodyType } from '../utils/Types'
 import CommentBody from './CommentBody'
 import axios from 'axios'
+import { getCommentReplies } from '../utils/api'
 
 const API_KEY = import.meta.env.VITE_API_KEY
 
@@ -12,11 +13,10 @@ function CommentCard( {comment} : {comment: CommentBodyType}) {
     const fetchreplies =async () => {
         try {
             if(comment.commentRepliesCount) {
-                const repliesResponse =await axios.get(`https://www.googleapis.com/youtube/v3/comments?key=${API_KEY}&part=snippet&parentId=${comment.conmmentId}`)
+                const repliesResponse =await getCommentReplies(comment.commentId)
                 
-                const items = repliesResponse.data.items
 
-                const repliesData = items.map((item:any)=> ({
+                const repliesData = repliesResponse.map((item:any)=> ({
                     commentId: item.id,
                     authorChannelId: item.snippet.authorChannelId?.value || '',
                     authorProfile: item.snippet.authorProfileImageUrl || '',

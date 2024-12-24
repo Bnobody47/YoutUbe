@@ -3,6 +3,7 @@ import CommentBody from './CommentBody'
 import axios from 'axios'
 import { CommentBodyType } from '../utils/Types'
 import CommentCard from './CommentCard'
+import { getVideoComments } from '../utils/api'
 
 const API_KEY = import.meta.env.VITE_API_KEY
 
@@ -16,9 +17,9 @@ function Comments({videoId}:{videoId?: string}) {
 
   const fetchComments =async () => {
     try {
-        const commentResponse = await axios.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=${API_KEY}&part=snippet,replies&videoId=${videoId}&${commentList.nextPageToken ?`&pageToken=${commentList.nextPageToken}`:``}`)
+        const commentResponse = await getVideoComments(videoId!, commentList!.nextPageToken!)
         console.log(commentResponse.data)
-        const items = commentResponse.data.items
+        const items = commentResponse.items
 
         const commentsData = items.map((comment:any)=>({
           commentId: comment.id,
@@ -33,7 +34,7 @@ function Comments({videoId}:{videoId?: string}) {
 
         setCommentlist(prev=>({
           comments: [...prev.comments, ...commentsData],
-          nextPageToken: commentResponse.data.nextPageToken
+          nextPageToken: commentResponse.nextPageToken
         }))
 
 
