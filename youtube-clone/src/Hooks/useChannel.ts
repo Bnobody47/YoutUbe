@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { ChannelInfoType } from '../utils/Types'
-import { getChannelInfo } from '../utils/api'
+import { ChannelInfoType, HomeVideoCardType } from '../utils/Types'
+import { getActivities, getChannelInfo } from '../utils/api'
+import { getActivitiesVideos } from '../utils/api'
+import { fetchVideosWithChannels } from '../utils/VideoDetailsHelper'
+
 
 const API_KEY = import.meta.env.VITE_API_KEY
 
 export const usechannel= () => {
     const [channelInfo,setChannelInfo] = useState<ChannelInfoType | null>(null)
+    const [channelVideoList, setChannelVideoList] = useState<HomeVideoCardType[]>()
 
     const fetchChannelInfo = async (channelId: string) => {
         const channelInfoResponse = await getChannelInfo(channelId)
@@ -31,7 +35,35 @@ export const usechannel= () => {
         setChannelInfo(channelInfoData)
     }
 
-    return{channelInfo, fetchChannelInfo}
+    const fetchChanneldata =async (channelId: string) => {
+        const channelVideosResponse = await getActivities(channelId)
+        // console.log("channelVideosResponse", channelVideosResponse)
+        const videoIds: string[] = []
+
+        channelVideosResponse.forEach(
+            (item:{
+              contentDetails:{
+                upload?:{ videoId:string },
+                playlistItem?:{ resourceId: {videoId: string}}
+              }
+            }) => {
+              if(item.contentDetails.upload){
+                videoIds.push(item.contentDetails.upload.videoId)
+              }else if(item.contentDetails.playlistItem){
+                videoIds.push(item.contentDetails.playlistItem.resourceId.videoId)
+              }
+            }
+          )
+    
+          const vidResponse = await getActivitiesVideos(videoIds!)
+          // console.log("vidResponse", vidResponse)
+    
+          const videosArray = await fetchVideosWithChannels(vidResponse.items)
+        //   console.log("videosArray", videosArray)
+          setChannelVideoList(videosArray)
+    }
+
+    return{channelInfo, fetchChannelInfo,channelVideoList,fetchChanneldata}
 
 
 }

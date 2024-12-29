@@ -3,36 +3,73 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { ChannelInfoType } from '../utils/Types'
 import { usechannel } from '../Hooks/useChannel'
+import { AiOutlineClose } from "react-icons/ai";
+import ChannelVideoList from '../Components/ChannelVideoList'
 
 
 function Channel() {
     const { channelId } = useParams()
-    const {channelInfo,fetchChannelInfo} = usechannel()
+    const {channelInfo, fetchChannelInfo, channelVideoList, fetchChanneldata} = usechannel()
+    const [showDesc, setShowDesc] = useState(false)
+    const [category, setCategory] = useState("videos")
     
     useEffect(()=> {
         fetchChannelInfo(channelId!)
+        fetchChanneldata(channelId!)
     }, [])
 
   return (
-    <div className='w-[95%] mx-auto mt-8'>
-        <div className="row row-cols-2">
-            {/* image */}
-            <div className="col-4">
-                <img src={channelInfo?.thumbnails} className="w-52 aspect-[1/1] object-cover rounded-full mx-auto" alt={channelInfo?.title || 'Channel Thumbnail'}
-/>            </div>
-            {/* detail */}
-            <div className="col-8">
-                <h1 className='text-4xl font-semibolde'>{channelInfo?.title}</h1>
-                <div className="flex gap-4 text-lg text-neutral-400 mt-2">
-                    <h2>{channelInfo?.customUrl}</h2>
-                    <h2>{channelInfo?.subCount} Subscribers</h2>
-                    <h2>{channelInfo?.videoCount} Videos</h2>
-                </div>
+    <div className="relative">
+        {showDesc && channelInfo?.description &&
+        <div className="absolute overflow-hidden bg-neutral-800 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2">
+            <div className="flex flex-col gap-2 items-end w-[600px] max-h-[500px] p-8 overflow-y-auto">
                 <div className="">
-                    <p className='w-[600px] line-clamp-3 text-neutral-400 whitespace-pre-line'>{channelInfo?.description}</p>
-                    <button className='font-semibold'>more</button>
+                    <AiOutlineClose 
+                    onClick={()=>setShowDesc(false)}
+                    className='text-2xl text-neutral-200'/>
+                </div>
+                <p className='text-lg whitespace-pre-line'>{channelInfo?.description}</p>
+            </div>
+        </div>
+        }
+
+        <div className='w-[95%] mx-auto mt-8'>
+            <div className="row row-cols-2">
+                {/* image */}
+                <div className="col-4">
+                    <img src={channelInfo?.thumbnails} className="w-52 aspect-[1/1] object-cover rounded-full mx-auto" alt={channelInfo?.title || 'Channel Thumbnail'}
+    />            </div>
+                {/* detail */}
+                <div className="col-8">
+                    <h1 className='text-4xl font-semibolde'>{channelInfo?.title}</h1>
+                    <div className="flex gap-4 text-lg text-neutral-400 mt-2">
+                        <h2>{channelInfo?.customUrl}</h2>
+                        <h2>{channelInfo?.subCount} Subscribers</h2>
+                        <h2>{channelInfo?.videoCount} Videos</h2>
+                    </div>
+                    {channelInfo?.description &&
+                        <div className="">
+                        <p className='w-[600px] line-clamp-3 text-neutral-400 whitespace-pre-line'>{channelInfo?.description}</p>
+                        <button
+                            onClick={() => setShowDesc(true)}
+                            className='font-semibold'>more</button>
+                    </div>
+                    }
                 </div>
             </div>
+
+            <div className="my-3">
+                <button 
+                    onClick={() => setCategory("videos")}
+                    className={`w-44 text-xl py-2 font-semibold ${category == "videos" ? "border-b" : ""} `}>Videos</button>
+                <button 
+                onClick={() => setCategory("playlists")}
+                className={`w-44 text-xl py-2 font-semibold ${category == "playlists" ? "border-b" : ""} `}>Playlists</button>
+                <hr className='h-1' />
+            </div>
+                    {category == "videos" &&
+                        <ChannelVideoList channelVideoList={channelVideoList!}/>
+                    }
         </div>
     </div>
   )
