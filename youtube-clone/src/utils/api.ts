@@ -22,10 +22,10 @@ export const getVideoDetails=async (videoId: string) => {
     return response.data.items
 }
 
-export const getActivities =async (channelId: string) => {
-    const url = `${BASE_URL}/v3/activities?key=${API_KEY}&part=snippet,contentDetails&channelId=${channelId}&maxResults=20`
+export const getActivities =async (channelId: string,pageToken?: string) => {
+    const url = `${BASE_URL}/v3/activities?key=${API_KEY}&part=snippet,contentDetails&channelId=${channelId}${pageToken ?`&pageToken=${pageToken}`:``}&maxResults=20`
     const response = await axios.get(url)
-    return response.data.items
+    return response.data
 }
 
 export const getVideoComments =async (videoId: string, pageToken?: string) => {
@@ -44,4 +44,11 @@ export const getChannelInfo =async (channelId?: string, channelIds?: string[]) =
     const url = `${BASE_URL}/v3/channels?key=${API_KEY}&part=snippet,contentDetails,statistics&id=${channelId ? channelId : channelIds}`
     const response = await axios.get(url)
     return response.data.items
+}
+
+
+export const getChannelPlaylists =async (channelId?: string,pageToken?: string) => {
+    const url = `${BASE_URL}/v3/playlists?key=${API_KEY}&part=snippet,contentDetails&channelId=${channelId}${pageToken?`&pageToken=${pageToken}`: ``}&maxResults=8`
+    const response = await axios.get(url)
+    return response.data
 }

@@ -36,7 +36,7 @@ function Watch() {
       
       const videoIds: string[] = []
 
-      response.forEach(
+      response.items.forEach(
         (item:{
           contentDetails:{
             upload?:{ videoId:string },
@@ -45,9 +45,10 @@ function Watch() {
         }) => {
           if(item.contentDetails.upload){
             videoIds.push(item.contentDetails.upload.videoId)
-          }else if(item.contentDetails.playlistItem){
-            videoIds.push(item.contentDetails.playlistItem.resourceId.videoId)
           }
+          // else if(item.contentDetails.playlistItem){
+          //   videoIds.push(item.contentDetails.playlistItem.resourceId.videoId)
+          // }
         }
       )
 
@@ -91,7 +92,7 @@ function Watch() {
             </div>
             <div className="col-4 flex flex-col gap-3">{
               activities?.map((item, ind) =>
-                  <MiniCard key={ind} item={item}/>
+                  <MiniCard key={item.videoId} item={item}/>
                 )
             }</div>
         </div>
