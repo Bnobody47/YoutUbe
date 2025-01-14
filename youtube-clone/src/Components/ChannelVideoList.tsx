@@ -7,7 +7,7 @@ function ChannelVideoList({channelVideos}:{channelVideos?: HomeVideoCardType[]})
         <div className="row row-cols-4 gap-y-4">
             {channelVideos &&
                 channelVideos.map((item: HomeVideoCardType, ind) =>
-                        <ChannelVideocard key={item.videoId} item={item}/>
+                        <ChannelVideocard key={ind} item={item}/>
                 )
             }
         </div>

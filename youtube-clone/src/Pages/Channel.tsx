@@ -15,7 +15,7 @@ import { getChannelPlaylists } from '../utils/api'
 
 function Channel() {
     const { channelId } = useParams()
-    const {category, setCategory, channelInfo, fetchChannelInfo, channelVideoList, channelPlayList, fetchChanneldata} = usechannel()
+    const {category, setCategory, channelInfo, fetchChannelInfo, channelVideoList, channelPlayList, fetchChanneldata, hasMore} = usechannel()
     const [showDesc, setShowDesc] = useState(false)
 
 
@@ -30,7 +30,7 @@ function Channel() {
     }, [category])
 
   return (
-    <div className="relative">
+    <div className="relative mb-12">
         {/* model */}
         {showDesc && channelInfo?.description &&
         <div className="absolute overflow-hidden bg-neutral-800 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2">
@@ -48,7 +48,7 @@ function Channel() {
         
         <InfiniteScroll 
                     next={ ()=> fetchMoreChanneldata()}
-                    hasMore={true}
+                    hasMore={hasMore}
                     dataLength={channelVideoList.videos.length}
                     loader={<Loading /> }
                 >
@@ -90,10 +90,6 @@ function Channel() {
                         ?<ChannelVideoList channelVideos={channelVideoList!.videos}/>
                         :<ChannelPlaylist channelPlayLists={channelPlayList!.playlists} />
                     }
-
-                    <button
-                    onClick={()=> fetchMoreChanneldata()} 
-                    className='my-3 text-xl border p-2'>Load more</button>
             </div>
         </InfiniteScroll>     
     </div>

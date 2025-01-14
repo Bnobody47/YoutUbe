@@ -34,7 +34,7 @@ export const getVideoComments =async (videoId: string, pageToken?: string) => {
     return response.data
 }
 
-export const getCommentReplies =async (commentId: string) => {
+export const getCommentReplies = async (commentId: string) => {
     const url = `${BASE_URL}/v3/comments?key=${API_KEY}&part=snippet&parentId=${commentId}`
     const response = await axios.get(url)
     return response.data.items

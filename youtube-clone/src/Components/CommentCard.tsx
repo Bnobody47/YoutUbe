@@ -3,6 +3,7 @@ import { CommentBodyType } from '../utils/Types'
 import CommentBody from './CommentBody'
 import axios from 'axios'
 import { getCommentReplies } from '../utils/api'
+import { parseReplies } from '../utils/parseData'
 
 const API_KEY = import.meta.env.VITE_API_KEY
 
@@ -16,14 +17,7 @@ function CommentCard( {comment} : {comment: CommentBodyType}) {
                 const repliesResponse =await getCommentReplies(comment.commentId)
                 
 
-                const repliesData = repliesResponse.map((item:any)=> ({
-                    commentId: item.id,
-                    authorChannelId: item.snippet.authorChannelId?.value || '',
-                    authorProfile: item.snippet.authorProfileImageUrl || '',
-                    authorName: item.snippet.authorDisplayName || 'Anonymous',
-                    commentText: item.snippet.textOriginal || '',
-                    commentLikes: item.snippet.likeCount || 0, 
-                })) 
+                const repliesData = parseReplies(repliesResponse)
 
                 setReplies(repliesData)
             }

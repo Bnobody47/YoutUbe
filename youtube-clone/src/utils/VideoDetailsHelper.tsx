@@ -1,26 +1,13 @@
 import { HomeVideoCardType } from "./Types"
 import axios from "axios"
 import { getChannelInfo } from "./api"
+import { parseVideosdata } from "./parseData"
 
 const API_KEY = import.meta.env.VITE_API_KEY
 
 
 export const fetchVideosWithChannels = async (items: any[]) => {
-        const videoData = items.map((item: any) => ({
-            videoId: item.id,
-            videoTitle: item.snippet.title,
-            videoDescription: item.snippet.description,
-            videoThumbnail: item.snippet.thumbnails.standard?.url || item.snippet.thumbnails?.high?.url || item.snippet.thumbnails?.medium?.url || item.snippet.thumbnails?.default?.url,
-            videoDuration: item.contentDetails?.duration || 'N/A',
-            videoViews: item.statistics?.viewCount || '0',
-            videoLikes: item.statistics.likeCount,
-            videoAge: item.snippet.publishedAt,
-            channelInfo: {
-                id: item.snippet.channelId,
-                name: item.snippet.channelTitle,
-                subCount: item.statistics?.subscriberCount
-            }
-        }))
+        const videoData = parseVideosdata(items)
         
         const channelIds = videoData.map((video: HomeVideoCardType) => video.channelInfo.id).join(',')
         

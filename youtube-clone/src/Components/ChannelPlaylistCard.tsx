@@ -9,7 +9,7 @@ function ChannelPlaylistCard({item}:{item: ChannelPlaylistType }) {
         <div className="relative">
             <div className="absolute flex gap-2 items-center bottom-2 right-2 bg-[#0c0c0cd0] px-2 py-0.5 rounded">
                 <FaList /> 
-                <h3>{item.videoCount}</h3>
+                <h3>{item.videoCount} videos</h3>
             </div>
             <img src={item.thumbnail} className="bg-red-300 object-cover aspect-[16/9] rounded" alt="" />
         </div>

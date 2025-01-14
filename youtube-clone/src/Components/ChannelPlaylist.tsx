@@ -7,7 +7,7 @@ function ChannelPlaylist({channelPlayLists}:{channelPlayLists: ChannelPlaylistTy
     <div className="row row-cols-4 gap-y-4">
             {
                 channelPlayLists.map((item: ChannelPlaylistType) =>
-                        <ChannelPlaylistCard item={item}/>
+                        <ChannelPlaylistCard key={item.id} item={item}/>
                 )
             }
         </div>
