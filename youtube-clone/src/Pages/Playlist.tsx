@@ -1,32 +1,72 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { getPlaylistInfo } from '../utils/api'
+import { PlayListInfoType } from '../utils/Types'
+import { AiOutlineClose } from 'react-icons/ai'
 
 function Playlist() {
-    // const{channelId, playlistId} = useParams()
+    const{channelId, playlistId} = useParams()
+    const [playListInfo, setPlayListInfo] = useState<PlayListInfoType | null>()
+        const [showDesc, setShowDesc] = useState(false)
+    
 
+    const fetchPlaylistInfo = async () => {
+        const playlistInfoResponse = await getPlaylistInfo(playlistId!)
+
+        const PlaylistInfoData ={
+            id: playlistInfoResponse.id,
+            title: playlistInfoResponse.snippet.title,
+            description: playlistInfoResponse.snippet.description,
+            thumbnail: playlistInfoResponse.snippet.thumbnails.standard?.url || playlistInfoResponse.snippet.thumbnails?.high?.url || playlistInfoResponse.snippet.thumbnails?.medium?.url || playlistInfoResponse.snippet.thumbnails?.default?.url,
+        }
+
+        // console.log("playlilstInfoData",PlaylistInfoData)
+        setPlayListInfo(PlaylistInfoData)
+    }
+
+    useEffect(() => {
+        fetchPlaylistInfo()
+
+    }, [])
 
     return (
-        <div className='w-[90%] mx-auto mt-8'>
-                <div className="row row-cols-2 bg-neutral-900 rounded-xl p-5 rounded-xl">
-                    {/* image */}
-                    <div className="col-4">
-                        {/* <img src={channelInfo?.thumbnails} className="w-52 aspect-[1/1] object-cover rounded-full mx-auto" alt={channelInfo?.title || 'Channel Thumbnail'}/> */}
-                        <div className=" aspect-[16/9] object-cover  mx-auto bg-red-400"></div>
-                    </div>
-                    {/* detail */}
-                    <div className="col-8">
-                        <h1 className='text-4xl font-semibolde'>channel title</h1>
-                        
-                        {/* {channelInfo?.description && */}
+
+        <div className="relative">
+
+            {/* model */}
+                    {showDesc && playListInfo?.description &&
+                    <div className="absolute overflow-hidden bg-neutral-800 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2">
+                        <div className="flex flex-col gap-2 items-end w-[600px] max-h-[500px] p-8 overflow-y-auto">
                             <div className="">
-                            <p className='w-[600px] line-clamp-3 text-neutral-400 whitespace-pre-line'>channel description</p>
-                            <button
-                                // onClick={() => setShowDesc(true)}
-                                className='font-semibold'>more</button>
+                                <AiOutlineClose 
+                                onClick={()=>setShowDesc(false)}
+                                className='text-2xl text-neutral-200'/>
+                            </div>
+                            <p className='text-lg whitespace-pre-line'>{playListInfo?.description}</p>
                         </div>
-                        {/* } */}
                     </div>
-                </div>
+                    }
+            <div className='w-[90%] mx-auto mt-8'>
+                    <div className="row row-cols-2 bg-neutral-900 rounded-xl p-5 rounded-xl">
+                        {/* image */}
+                        <div className="col-4">
+                            <img src={playListInfo?.thumbnail} className="aspect-[16/10] object-cover  mx-auto" alt={playListInfo?.title || 'Channel Thumbnail'}/>
+                        </div>
+                        {/* detail */}
+                        <div className="col-8 flex flex-col gap-2">
+                            <h1 className='text-4xl font-semibolde'>{playListInfo?.title}</h1>
+                            
+                            {playListInfo?.description &&
+                                <div className="">
+                                    <p className='w-[600px] line-clamp-3 text-neutral-400 whitespace-pre-line'>{playListInfo?.description}</p>
+                                    <button
+                                        onClick={() => setShowDesc(true)}
+                                        className='font-semibold'>more</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+            </div>
         </div>
     )
 }
