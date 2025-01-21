@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaYoutube } from "react-icons/fa";
@@ -7,6 +8,20 @@ import { AiOutlineClose } from "react-icons/ai";
 
 function Navbar() {
   const navigate = useNavigate()
+
+  const [search, setSearch] = useState<string>("")
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if(e.key === 'Enter'){
+      e.preventDefault()
+      if(search.trim()){
+        navigate(`/search?query=${search}`)
+      }else{
+        navigate(`/`)
+      }
+    }
+  }
+
   return (
     <div className='w-full bg-[#0c0c0c]'>
       <div className="flex justify-between h-14 w-[95%] mx-auto">
@@ -29,7 +44,8 @@ function Navbar() {
                   type="text"
                   placeholder="Search" 
                   className="w-96 px-3 text-lg text-zinc-300 placeholder-neutral-500 bg-[#0c0c0c] focus:outline-none"
-                
+                  onChange={(e)=> setSearch(e.target.value)}
+                  onKeyDown={handleKeyPress}
                 />
                 <AiOutlineClose className="text-lg cursor-pointer text-neutral-400"/>
 

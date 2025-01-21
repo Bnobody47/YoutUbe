@@ -64,3 +64,9 @@ export const getPlaylisVideos = async (playlistId: string, pageToken?: string) =
     const response = await axios.get(url)
     return response.data
 }
+
+export const getSearchVideos = async (query: string, pageToken?: string) => {
+    const url = `${BASE_URL}/v3/search?key=${API_KEY}&part=snippet&q=${query}${pageToken ? `&pageToken=${pageToken}` : ''}&maxResults=20`
+    const response = await axios.get(url)
+    return response.data
+}
