@@ -5,7 +5,7 @@ import { PlayListInfoType, PlayListVideoType } from '../utils/Types'
 import { AiOutlineClose } from 'react-icons/ai'
 import { usePlaylistInfo } from '../Hooks/usePlaylistInfo'
 import { usePlaylistItems } from '../Hooks/usePlaylistitems'
-import Playlistitems from '../Components/Playlistitems'
+import Playlistitems from '../Components/PlaylistItems'
 
 
 function Playlist() {
@@ -26,7 +26,7 @@ function Playlist() {
 
             {/* model */}
                     {showDesc && playListInfo?.description &&
-                    <div className="absolute overflow-hidden bg-neutral-800 rounded-xl left-1/2 top-1/2 transform -translate-x-1/2">
+                    <div className="z-[10] absolute overflow-hidden bg-neutral-800 rounded-xl left-1/2 top-14 transform -translate-x-1/2">
                         <div className="flex flex-col gap-2 items-end w-[600px] max-h-[500px] p-8 overflow-y-auto">
                             <div className="">
                                 <AiOutlineClose 

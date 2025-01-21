@@ -6,10 +6,9 @@ import { CiSearch } from "react-icons/ci";
 import { AiOutlineClose } from "react-icons/ai";
 
 
-function Navbar() {
+function Navbar({search, setSearch}:{search: string, setSearch: (q: string) => void}) {
   const navigate = useNavigate()
 
-  const [search, setSearch] = useState<string>("")
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if(e.key === 'Enter'){
@@ -25,7 +24,7 @@ function Navbar() {
   return (
     <div className='w-full bg-[#0c0c0c]'>
       <div className="flex justify-between h-14 w-[95%] mx-auto">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-8 cursor-pointer">
           <a className="" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
             <RxHamburgerMenu className="text-xl"/>
           </a>
@@ -40,14 +39,17 @@ function Navbar() {
           <form>
             <div className="flex item-center sm:h-10 h-9 border-[0.6px] border-neutral-700 rounded-full overflow-hidden">
               <div className="flex items-center pr-5">
-                <input 
+                <input
+                   value={search}
                   type="text"
                   placeholder="Search" 
                   className="w-96 px-3 text-lg text-zinc-300 placeholder-neutral-500 bg-[#0c0c0c] focus:outline-none"
                   onChange={(e)=> setSearch(e.target.value)}
                   onKeyDown={handleKeyPress}
                 />
-                <AiOutlineClose className="text-lg cursor-pointer text-neutral-400"/>
+                <AiOutlineClose
+                onClick={()=> setSearch("")}
+                className={`text-lg cursor-pointer text-neutral-400 ${!search ? `invisible`: "visible"} `}/>
 
               </div>
               <button className="w-16 flex items-center justify-center border-l-[1px] border-neutral-700">
