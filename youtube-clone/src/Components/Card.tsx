@@ -4,7 +4,7 @@ import { HomeVideoCardType } from '../utils/Types'
 
 function Card({ data }: {data: HomeVideoCardType}) {
   return (
-    <div className='flex flex-col gap-3 pb-3'>
+    <div className='flex flex-col gap-3 pb-3 hover:scale-[101%] duration-200 easy-in-out'>
       {/*Tumbnail*/}
       <div className="relative">
         <Link to={`/watch/${data.videoId}/${data.channelInfo.id}`}>
@@ -14,8 +14,9 @@ function Card({ data }: {data: HomeVideoCardType}) {
       </div>
       {/*details*/}
       <div className="flex gap-2">
-        <Link to={`/channel/${data.channelInfo.id}`}>
-          <img src={data.channelInfo.image} className="bg-red-300 aspect-[1/1] rounded-full h-12" alt="" />
+        <Link to={`/channel/${data.channelInfo.id}`}
+        className='aspect-[1/1] h-10'>
+          <img src={data.channelInfo.image} className="bg-red-300 rounded-full hover:scale-[108%] duration-200 easy-in-out" alt="" />
         </Link>
         <div className='flex flex-col'>
           <h3 className='text-lg line-clamp-2'>{data.videoTitle}</h3>

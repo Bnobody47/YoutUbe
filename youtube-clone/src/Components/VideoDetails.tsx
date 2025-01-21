@@ -3,6 +3,7 @@ import { BiLike } from "react-icons/bi";
 import { FaShare } from "react-icons/fa";
 import { useSearchParams } from 'react-router-dom';
 import { HomeVideoCardType } from '../utils/Types';
+import { Link } from 'react-router-dom';
 
 function VideoDetails({details}: {details?: HomeVideoCardType}) {
     const [showDescription, setShowDescription] = useState(false)
@@ -13,10 +14,12 @@ function VideoDetails({details}: {details?: HomeVideoCardType}) {
         <div className="flex justify-between">
             {/* channel info */}
             <div className="flex gap-3">
-                <img src={details?.channelInfo.image} className="w-12 aspect-[1/1] rounded-full object-" alt="" />
+                <Link to={`/channel/${details?.channelInfo.id}`}>
+                    <img src={details?.channelInfo.image} className="w-12 aspect-[1/1] rounded-full object-fit hover:scale-[108%] duration-200 easy-in-out" alt="" />
+                </Link>
                 <div className="flex flex-col text-lg">
                     <h2 className='font-semibold'>{details?.channelInfo.name}</h2>
-                    <h2>{details?.channelInfo.subCount}</h2>
+                    <h2>{details?.channelInfo.subCount} subscribers</h2>
                 </div>
             </div>
                 {/* btns */}

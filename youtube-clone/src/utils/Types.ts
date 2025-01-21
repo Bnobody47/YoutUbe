@@ -53,4 +53,5 @@ export interface PlayListVideoType{
     id: string,
     title: string,
     thumbnail: string,
+    channelId: string,
 }

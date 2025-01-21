@@ -58,7 +58,7 @@ function Playlist() {
                         </div>
                     </div>
 
-                    <Playlistitems videos={playlistItems.videos}/>
+                    <Playlistitems videos={playlistItems.videos} channelId={channelId!} />
             </div>
         </div>
     )
