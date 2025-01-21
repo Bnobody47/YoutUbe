@@ -48,3 +48,9 @@ export interface PlayListInfoType{
     description: string,
     thumbnail: string,
 }
+
+export interface PlayListVideoType{
+    id: string,
+    title: string,
+    thumbnail: string,
+}

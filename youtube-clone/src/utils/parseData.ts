@@ -51,3 +51,10 @@ export const parseReplies = (items: any[]): CommentBodyType[] => {
         commentLikes: item.snippet.likeCount || 0,
     }))
 }
+
+export const parsePlaylistInfo = (item: any) => ({
+    id: item.id,
+    title: item.snippet.title,
+    description: item.snippet.description,
+    thumbnail: item.snippet.thumbnails.standard?.url || item.snippet.thumbnails?.high?.url || item.snippet.thumbnails?.medium?.url || item.snippet.thumbnails?.default?.url,
+})

@@ -1,31 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getPlaylistInfo } from '../utils/api'
-import { PlayListInfoType } from '../utils/Types'
+import { getPlaylistInfo, getPlaylisVideos } from '../utils/api'
+import { PlayListInfoType, PlayListVideoType } from '../utils/Types'
 import { AiOutlineClose } from 'react-icons/ai'
+import { usePlaylistInfo } from '../Hooks/usePlaylistInfo'
+import { usePlaylistItems } from '../Hooks/usePlaylistitems'
+import Playlistitems from '../Components/Playlistitems'
+
 
 function Playlist() {
     const{channelId, playlistId} = useParams()
-    const [playListInfo, setPlayListInfo] = useState<PlayListInfoType | null>()
-        const [showDesc, setShowDesc] = useState(false)
-    
+    const {playListInfo, showDesc, setShowDesc, fetchPlaylistInfo} = usePlaylistInfo()
+    const {playlistItems, fetchPlaylistVideos} = usePlaylistItems()
 
-    const fetchPlaylistInfo = async () => {
-        const playlistInfoResponse = await getPlaylistInfo(playlistId!)
-
-        const PlaylistInfoData ={
-            id: playlistInfoResponse.id,
-            title: playlistInfoResponse.snippet.title,
-            description: playlistInfoResponse.snippet.description,
-            thumbnail: playlistInfoResponse.snippet.thumbnails.standard?.url || playlistInfoResponse.snippet.thumbnails?.high?.url || playlistInfoResponse.snippet.thumbnails?.medium?.url || playlistInfoResponse.snippet.thumbnails?.default?.url,
-        }
-
-        // console.log("playlilstInfoData",PlaylistInfoData)
-        setPlayListInfo(PlaylistInfoData)
-    }
 
     useEffect(() => {
-        fetchPlaylistInfo()
+        fetchPlaylistInfo(playlistId!)
+        fetchPlaylistVideos(playlistId!)
 
     }, [])
 
@@ -66,6 +57,8 @@ function Playlist() {
                             }
                         </div>
                     </div>
+
+                    <Playlistitems videos={playlistItems.videos}/>
             </div>
         </div>
     )
