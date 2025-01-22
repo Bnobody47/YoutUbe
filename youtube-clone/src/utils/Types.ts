@@ -1,17 +1,17 @@
 export interface HomeVideoCardType {
-    videoId:string
-    videoTitle:string
-    videoDescription:string
-    videoThumbnail:string
-    videoDuration:string
-    videoViews:string
-    videoLikes:string
-    videoAge:string
-    channelInfo:{
-        id:string
-        image?:string
-        name:string
-        subCount?:string
+    videoId: string
+    videoTitle: string
+    videoDescription: string,
+    videoThumbnail: string
+    videoDuration: string
+    videoViews: string
+    videoLikes: string,
+    videoAge: string
+    channelInfo: {
+        id: string
+        image?: string
+        name: string
+        subCount?: string
     }
 }
 
@@ -25,33 +25,32 @@ export interface CommentBodyType {
     commentRepliesCount?: string
 }
 
-export interface ChannelInfoType{
+export interface ChannelInfoType {
     id: string,
-    thumbnails: string,
+    thumbnail: string,
     title: string,
     customUrl: string,
     description: string,
     subCount: string,
-    videoCount: string
-}
-
-export interface ChannelPlaylistType{
-    id: string,
-    title: string,
-    thumbnail: string,
     videoCount: string,
 }
 
-export interface PlayListInfoType{
+export interface ChannelPlaylistsType {
     id: string,
     title: string,
-    description: string,
     thumbnail: string,
+    videoCount: string
 }
 
-export interface PlayListVideoType{
+export interface PlaylistInfoType {
+    id: string
+    title: string,
+    description: string,
+    thumbnail: string
+}
+
+export interface PlaylistVideotype {
     id: string,
     title: string,
-    thumbnail: string,
-    channelId: string,
+    thumbnail: string
 }
