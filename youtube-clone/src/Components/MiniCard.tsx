@@ -7,7 +7,7 @@ function MiniCard({item}: { item: HomeVideoCardType }) {
     <Link to={`/watch/${item.videoId}/${item.channelInfo.id}`} className=''>
         <div className='flex gap-3 hover:scale-[101%] duration-200 easy-in-out'>
             <div className="relative min-w-fit">
-                <span className='absolute bottom-1 right-1 bg-[#0c0c0cd0] px-2 py-0.5 rounded'>{item.videoDuration}</span>
+                <span className='sm:text-md text-sm absolute bottom-1 right-1 bg-[#0c0c0cd0] px-2 py-0.5 rounded'>{item.videoDuration}</span>
                 <img src={item.videoThumbnail} className="w-40 aspect-[16/9] object-cover rounded" alt="" />
             </div>
             <div className="">

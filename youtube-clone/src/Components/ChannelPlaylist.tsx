@@ -4,7 +4,7 @@ import { ChannelPlaylistType } from '../utils/Types'
 
 function ChannelPlaylist({channelId, channelPlayLists}:{channelId: string, channelPlayLists: ChannelPlaylistType[]}) {
   return (
-    <div className="row row-cols-4 gap-y-4">
+    <div className="row row-cols-lg-4 row-cols-md-3 row-cols-2 gap-y-4">
             {
                 channelPlayLists.map((item: ChannelPlaylistType) =>
                         <ChannelPlaylistCard key={item.id} item={item} channelId= {channelId}/>

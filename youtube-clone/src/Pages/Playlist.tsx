@@ -37,19 +37,19 @@ function Playlist() {
                         </div>
                     </div>
                     }
-            <div className='w-[90%] mx-auto mt-8'>
-                    <div className="row row-cols-2 bg-neutral-900 rounded-xl p-5 rounded-xl">
+            <div className='w-[90%] mx-auto ms:mt-8 mt-4'>
+                    <div className="row row-cols-2 bg-neutral-900 md:p-5 p-3 rounded-xl">
                         {/* image */}
-                        <div className="col-4">
+                        <div className="col-md-4 col-12">
                             <img src={playListInfo?.thumbnail} className="aspect-[16/10] object-cover  mx-auto" alt={playListInfo?.title || 'Channel Thumbnail'}/>
                         </div>
                         {/* detail */}
-                        <div className="col-8 flex flex-col gap-2">
-                            <h1 className='text-4xl font-semibolde'>{playListInfo?.title}</h1>
+                        <div className="col-md-8 col-12 flex flex-col gap-2">
+                            <h1 className='md:text-4xl sm:text-3xl text-2xl font-semibolde'>{playListInfo?.title}</h1>
                             
                             {playListInfo?.description &&
                                 <div className="">
-                                    <p className='w-[600px] line-clamp-3 text-neutral-400 whitespace-pre-line'>{playListInfo?.description}</p>
+                                    <p className=' line-clamp-3 text-neutral-400 whitespace-pre-line'>{playListInfo?.description}</p>
                                     <button
                                         onClick={() => setShowDesc(true)}
                                         className='font-semibold'>more</button>

@@ -31,7 +31,7 @@ function Home({filter, categoryId}:{filter: string, categoryId: string | null}) 
                     dataLength={homeVideos[filter].videos.length }
                     loader={<Loading /> }
                 >
-                <div className='row row-cols-3 w-[95%] mx-auto mt-6 '>
+                <div className='row row-cols-md-3 row-cols-sm-2 row-cols-1 w-[95%] mx-auto mt-6 '>
                         {homeVideos[filter].videos?.map(item =>
                             <Card key={item.videoId} data={item} />
                         )}

@@ -77,7 +77,7 @@ function Watch() {
   return (
     <div className='w-[95%] mx-auto mt-6 mb-12'>
         <div className="row">
-            <div className="col-8 ">
+            <div className="col-xl-8 col-lg-7">
                 {/* <div className="w-full aspect-[16/9] bg-red-400"></div> */}
                 <iframe
                   className="w-full aspect-[16/9] bg-red-400"
@@ -88,13 +88,18 @@ function Watch() {
                   >
                 </iframe>
                 <VideoDetails details={details} />
-                <Comments videoId={details?.videoId}/>
+                <div className="lg:block hidden">
+                  <Comments videoId={details?.videoId}/>
+                </div>
             </div>
-            <div className="col-4 flex flex-col gap-3">{
+            <div className="col-xl-4 col-lg-5 flex flex-col gap-3 lg:mt-0 mt-3">{
               activities?.map((item, ind) =>
                   <MiniCard key={item.videoId} item={item}/>
                 )
             }</div>
+            <div className="block lg:hidden">
+              <Comments videoId={details?.videoId}/>
+            </div>
         </div>
     </div>
   )

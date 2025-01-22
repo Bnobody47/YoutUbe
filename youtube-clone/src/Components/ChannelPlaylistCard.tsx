@@ -17,7 +17,7 @@ function ChannelPlaylistCard({item, channelId}:{item: ChannelPlaylistType, chann
           </div>
           {/* title */}
           <div className="flex flex-col gap-1 mt-1">
-              <h1 className='text-md line-clamp-1'>{item.title}</h1>
+              <h1 className='sm:text-md text-sm line-clamp-1'>{item.title}</h1>
           </div>
       </div>
     </Link>

@@ -52,16 +52,16 @@ function Channel() {
                     dataLength={channelVideoList.videos.length}
                     loader={<Loading /> }
                 >
-            <div className='w-[95%] mx-auto mt-8'>
+            <div className='w-[95%] mx-auto md:mt-8 mt-'>
                 <div className="row row-cols-2">
                     {/* image */}
                     <div className="col-4">
-                        <img src={channelInfo?.thumbnails} className="w-52 aspect-[1/1] object-cover rounded-full mx-auto" alt={channelInfo?.title || 'Channel Thumbnail'}
+                        <img src={channelInfo?.thumbnails} className="md:w-52 sm:w-40 w-36 aspect-[1/1] object-cover rounded-full mx-auto" alt={channelInfo?.title || 'Channel Thumbnail'}
         />            </div>
                     {/* detail */}
                     <div className="col-8">
-                        <h1 className='text-4xl font-semibolde'>{channelInfo?.title}</h1>
-                        <div className="flex gap-4 text-lg text-neutral-400 mt-2">
+                        <h1 className='md:text-4xl sm:text-3xl text-2xl font-semibolde'>{channelInfo?.title}</h1>
+                        <div className="sm:flex gap-4 sm:text-lg text-md text-neutral-400 mt-2">
                             <h2>{channelInfo?.customUrl}</h2>
                             <h2>{channelInfo?.subCount} Subscribers</h2>
                             <h2>{channelInfo?.videoCount} Videos</h2>
@@ -77,13 +77,13 @@ function Channel() {
                     </div>
                 </div>
 
-                <div className="my-3">
+                <div className="sm:my-3 my-1">
                     <button 
                         onClick={() => setCategory("videos")}
-                        className={`w-44 text-xl py-2 font-semibold ${category == "videos" ? "border-b" : ""} `}>Videos</button>
+                        className={`md:w-44 w-32 sm:text-xl text-lg py-2 font-semibold ${category == "videos" ? "border-b" : ""} `}>Videos</button>
                     <button 
                     onClick={() => setCategory("playlists")}
-                    className={`w-44 text-xl py-2 font-semibold ${category == "playlists" ? "border-b" : ""} `}>Playlists</button>
+                    className={`md:w-44 w-32 sm:text-xl text-lg py-2 font-semibold ${category == "playlists" ? "border-b" : ""} `}>Playlists</button>
                     <hr className='h-1' />
                 </div>
                     {category == "videos"
