@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getPlaylistInfo, getPlaylisVideos } from '../utils/api'
-import { PlayListInfoType, PlayListVideoType } from '../utils/Types'
 import { AiOutlineClose } from 'react-icons/ai'
 import { usePlaylistInfo } from '../Hooks/usePlaylistInfo'
 import { usePlaylistItems } from '../Hooks/usePlaylistitems'
@@ -44,7 +42,7 @@ function Playlist() {
                             <img src={playListInfo?.thumbnail} className="aspect-[16/10] object-cover  mx-auto" alt={playListInfo?.title || 'Channel Thumbnail'}/>
                         </div>
                         {/* detail */}
-                        <div className="col-md-8 col-12 flex flex-col gap-2">
+                        <div className="col-md-8 flex flex-col gap-2">
                             <h1 className='md:text-4xl sm:text-3xl text-2xl font-semibolde'>{playListInfo?.title}</h1>
                             
                             {playListInfo?.description &&

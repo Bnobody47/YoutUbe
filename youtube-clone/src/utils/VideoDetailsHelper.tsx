@@ -3,7 +3,7 @@ import axios from "axios"
 import { getChannelInfo } from "./api"
 import { parseVideosdata } from "./parseData"
 
-const API_KEY = import.meta.env.VITE_API_KEY
+
 
 
 export const fetchVideosWithChannels = async (items: any[]) => {

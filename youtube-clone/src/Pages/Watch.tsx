@@ -8,7 +8,7 @@ import { fetchVideosWithChannels } from '../utils/VideoDetailsHelper'
 import Comments from '../Components/Comments'
 import { getActivities, getActivitiesVideos, getVideoDetails } from '../utils/api'
 
-const API_KEY =import.meta.env.VITE_API_KEY
+
 
 function Watch() {
   const{videoId, channelId} = useParams()
