@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react'
 import { CommentBodyType } from '../utils/Types'
 import CommentBody from './CommentBody'
-import axios from 'axios'
 import { getCommetReplies } from '../utils/api'
 import { parseReplies } from '../utils/parseData'
 
-const API_KEY = import.meta.env.VITE_API_KEY
 
 function CommentCard({ comment }: { comment: CommentBodyType }) {
 

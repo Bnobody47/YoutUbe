@@ -1,4 +1,3 @@
-import React from 'react'
 import { BiLike } from "react-icons/bi";
 import { CommentBodyType } from '../utils/Types';
 

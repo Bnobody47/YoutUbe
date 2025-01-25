@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { getActvitiesVideos, getSearchVideos } from '../utils/api'
 import { fetchVideosWithChannels } from '../utils/videoDetailsHelper'

@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import VideoDetails from '../Components/VideoDetails'
 import MiniCard from '../Components/MiniCard'
 import { HomeVideoCardType } from '../utils/Types'
-import axios from 'axios'
 import { fetchVideosWithChannels } from '../utils/videoDetailsHelper'
 import Comments from '../Components/Comments'
 import { getActivities, getActvitiesVideos, getVideoDetails } from '../utils/api'
 
-const API_KEY = import.meta.env.VITE_API_KEY
+
 
 function Watch() {
     const { videoId, channelId } = useParams()
@@ -88,7 +87,7 @@ function Watch() {
                     </div>
                 </div>
                 <div className="col-xl-4 col-lg-5 flex flex-col gap-3 lg:mt-0 mt-3">{
-                    activities?.map((item, ind) =>
+                    activities?.map((item) =>
                         <MiniCard key={item.videoId} item={item} />
                     )
                 }</div>

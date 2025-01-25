@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { ChannelInfoType } from '../utils/Types'
 import { useChannel } from '../Hooks/useChannel'
 import { AiOutlineClose } from "react-icons/ai";
 import ChannelVideoList from '../Components/ChannelVideoList'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Loading from '../Components/Loading'
 import ChannelPlaylist from '../Components/ChannelPlaylist'
-import { getChannelPlaylists } from '../utils/api'
 
 
 

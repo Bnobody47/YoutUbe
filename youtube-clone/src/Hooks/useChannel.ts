@@ -1,12 +1,11 @@
 import { useState } from "react"
-import axios from "axios"
 import { ChannelInfoType, ChannelPlaylistsType, HomeVideoCardType } from "../utils/Types"
 import { getActivities, getChannelInfo } from "../utils/api"
 import { getActvitiesVideos, getChannelPlaylists } from "../utils/api"
 import { fetchVideosWithChannels } from "../utils/videoDetailsHelper"
 import { parseChannelPlaylists } from "../utils/parseData"
 
-const API_KEY = import.meta.env.VITE_API_KEY
+
 
 interface ChannelVideoListState {
     videos: HomeVideoCardType[],

@@ -1,10 +1,9 @@
-import React from 'react'
-import { PlayListVideoType } from '../utils/Types'
+import { PlaylistVideotype } from '../utils/Types'
 import { Link } from 'react-router-dom'
 
-function PlaylistItemsCard({item, ind, channelId}:{item: PlayListVideoType, ind: number, channelId: string}) {
+function PlaylistItemsCard({item, ind}:{item: PlaylistVideotype, ind: number}) {
   return (
-    <Link to={`/watch/${item.id}/${item.channelId}`} className='flex gap-3'>
+    <Link to={`/watch/${item.id}/${item.id}`} className='flex gap-3'>
         <div className='col flex flex-col hover:scale-[101%] duration-200 easy-in-out'>
                 {/* thumbnail */}
                 <div className="relative">

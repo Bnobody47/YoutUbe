@@ -1,5 +1,4 @@
-import React from 'react'
-import ChannelVideoCard from './ChannelVideoCard'
+import ChannelVideoCard from './ChannelVideocard'
 import { HomeVideoCardType } from '../utils/Types'
 
 function ChannelVideoList({ channelVideos }: { channelVideos?: HomeVideoCardType[] }) {

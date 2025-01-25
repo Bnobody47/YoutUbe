@@ -1,13 +1,12 @@
 import { HomeVideoCardType } from "./Types"
-import axios from "axios"
 import { getChannelInfo } from "./api"
-import { parseVideosdata } from "./parseData"
+import { parseVideos } from "./parseData"
 
 
 
 
 export const fetchVideosWithChannels = async (items: any[]) => {
-        const videoData = parseVideosdata(items)
+        const videoData = parseVideos(items)
         
         const channelIds = videoData.map((video: HomeVideoCardType) => video.channelInfo.id).join(',')
         

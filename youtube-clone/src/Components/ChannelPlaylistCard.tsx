@@ -1,4 +1,3 @@
-import React from 'react'
 import { FaList } from "react-icons/fa";
 import { ChannelPlaylistsType } from '../utils/Types';
 import { Link } from 'react-router-dom';
