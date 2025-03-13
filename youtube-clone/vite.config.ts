@@ -10,12 +10,7 @@ export default defineConfig({
     emptyOutDir: true,
     assetsDir: 'assets',
     sourcemap: false,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true
-      }
-    }
+    minify: true
   },
   server: {
     port: 3000,
