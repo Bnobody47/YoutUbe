@@ -44,7 +44,7 @@ export const useChannel = () => {
     const fetchChanneldata = async (channelId: string, pageToken?: string) => {
         if (category == "videos") {
 
-            const channelVideosResponse = await getActivities(channelId, channelVideoList!.nextPageToken!)
+            const channelVideosResponse = await getActivities(channelId, pageToken)
             console.log("channelVideosResponse", channelVideosResponse)
             const videoIds: string[] = []
 
