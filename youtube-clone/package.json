@@ -3,10 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "postinstall": "npm install vite @vitejs/plugin-react --save",
+    "build": "npx tsc && npx vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
