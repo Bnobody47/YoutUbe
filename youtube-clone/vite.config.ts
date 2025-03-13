@@ -4,12 +4,18 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/',
+  base: './',
   build: {
     outDir: 'dist',
+    emptyOutDir: true,
     assetsDir: 'assets',
     sourcemap: false,
-    minify: true
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true
+      }
+    }
   },
   server: {
     port: 3000,
