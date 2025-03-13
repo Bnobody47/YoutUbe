@@ -39,7 +39,7 @@ A modern YouTube clone built with React, TypeScript, and Vite. This application 
 
 1. Clone the repository:
 \`\`\`bash
-git clone https://github.com/your-username/youtube-clone.git
+git clone https://github.com/Bnobody47/youtube-clone.git
 cd youtube-clone
 \`\`\`
 
@@ -151,6 +151,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📞 Contact
 
-Your Name - [your-email@example.com](mailto:your-email@example.com)
+Your Name - [beamlakadaneb@gmail.com](mailto:your-email@example.com)
 
-Project Link: [https://github.com/your-username/youtube-clone](https://github.com/your-username/youtube-clone)
+Project Link: [https://github.com/Bnobody47/youtube-clone](https://github.com/your-username/youtube-clone)
