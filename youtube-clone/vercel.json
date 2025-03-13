@@ -3,5 +3,11 @@
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "framework": null,
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node@18"
+    }
+  ]
 } 
